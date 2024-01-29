@@ -18,7 +18,6 @@ namespace Kitalalo
 
         public static int valasztottszo;
         public static string ezlett;
-        public static string word;
         public static string tipp;
         public static string guess;
         #endregion
@@ -27,17 +26,16 @@ namespace Kitalalo
         {
             aKivalasztottSzo();
 
-            word = ezlett;
             tipp = "";
 
             // Kezdetben minden karakter pontként jelenik meg
-            for (int i = 0; i < word.Length; i++)
+            for (int i = 0; i < ezlett.Length; i++)
             {
                 tipp += ".";
             }
 
             // Addig folytatjuk a tippelést, amíg nem találjuk ki a teljes szót
-            while (tipp != word)
+            while (tipp != ezlett)
             {
                 Console.Clear();
                 Console.WriteLine("Kitalálandó szó: " + tipp);
@@ -51,7 +49,7 @@ namespace Kitalalo
                     guess = Console.ReadLine().ToLower();
                 }
 
-                if (guess == word)
+                if (guess == ezlett)
                 {
                     Console.Clear();
                     Console.WriteLine("Gratulálok, kitaláltad a szót!");
@@ -61,11 +59,11 @@ namespace Kitalalo
                 else
                 {
                     // Ellenőrizzük, hogy a tippelt szóban van-e olyan karakter, ami megegyezik a célszóval
-                    for (int i = 0; i < word.Length; i++)
+                    for (int i = 0; i < ezlett.Length; i++)
                     {
-                        if (guess.Contains(word[i]))
+                        if (guess.Contains(ezlett[i]))
                         {
-                            tipp = tipp.Substring(0, i) + word[i] + tipp.Substring(i + 1);
+                            tipp = tipp.Substring(0, i) + ezlett[i] + tipp.Substring(i + 1);
                         }
                     }
                     Console.WriteLine("Nem talált. Próbáld újra!");
