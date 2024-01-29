@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,8 +9,86 @@ namespace Kitalalo
 {
     internal class Program
     {
+        #region változók
+        public static string[] items = {
+    "fuvola", "csirke", "adatok", "asztal", "fogoly",
+    "bicska", "farkas", "almafa", "babona", "gerinc",
+    "dervis", "bagoly", "ecetes", "angyal", "boglya" };
+        public static string[] item = {};
+
+        public static int valasztottszo;
+        public static string ezlett;
+        public static string word;
+        public static string tipp;
+        public static string guess;
+        #endregion
+
         static void Main(string[] args)
         {
+            aKivalasztottSzo();
+
+            word = ezlett;
+            tipp = "";
+
+            // Kezdetben minden karakter pontként jelenik meg
+            for (int i = 0; i < word.Length; i++)
+            {
+                tipp += ".";
+            }
+
+            // Addig folytatjuk a tippelést, amíg nem találjuk ki a teljes szót
+            while (tipp != word)
+            {
+                Console.Clear();
+                Console.WriteLine("Kitalálandó szó: " + tipp);
+                Console.Write("Tippelj egy szót (6 karakter): ");
+                guess = Console.ReadLine().ToLower();
+                while (guess.Length != 6)
+                {
+                    Console.Clear() ;
+                    Console.WriteLine("Kitalálandó szó: " + tipp);
+                    Console.Write("Tippelj egy szót (6 karakter): ");
+                    guess = Console.ReadLine().ToLower();
+                }
+
+                if (guess == word)
+                {
+                    Console.WriteLine("Gratulálok, kitaláltad a szót!");
+                    break;
+                }
+                else
+                {
+                    // Ellenőrizzük, hogy a tippelt szóban van-e olyan karakter, ami megegyezik a célszóval
+                    for (int i = 0; i < word.Length; i++)
+                    {
+                        if (guess.Contains(word[i]))
+                        {
+                            tipp = tipp.Substring(0, i) + word[i] + tipp.Substring(i + 1);
+                        }
+                    }
+                    Console.WriteLine("Nem talált. Próbáld újra!");
+                }
+            }
+
+
+                Console.ReadKey();
+
+        }
+
+        public static void aKivalasztottSzo() 
+        {
+            valasztottszo = aGepSzotValaszt(); //
+            //Console.WriteLine(valasztottszo);
+
+            ezlett = items[valasztottszo];
+            Console.WriteLine("rejtett szó: " + ezlett);
+
+        }
+        public static int aGepSzotValaszt()
+        {
+            Random random= new Random();
+            int a = random.Next(0,14);
+            return a;
         }
     }
 }
