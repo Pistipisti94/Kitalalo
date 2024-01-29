@@ -53,7 +53,9 @@ namespace Kitalalo
 
                 if (guess == word)
                 {
+                    Console.Clear();
                     Console.WriteLine("Gratulálok, kitaláltad a szót!");
+                    Console.WriteLine("A kitalálandó szó a(z): " + ezlett + " volt.");
                     break;
                 }
                 else
