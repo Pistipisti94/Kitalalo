@@ -35,13 +35,13 @@ namespace Kitalalo
             }
 
             // Addig folytatjuk a tippelést, amíg nem találjuk ki a teljes szót
-            while (tipp != ezlett)
+            while (tipp != ezlett || guess == "stop")
             {
                 Console.Clear();
                 Console.WriteLine("Kitalálandó szó: " + tipp);
                 Console.Write("Tippelj egy szót (6 karakter): ");
                 guess = Console.ReadLine().ToLower();
-                while (guess.Length != 6)
+                while (guess.Length != 6 || guess == "stop")
                 {
                     Console.Clear() ;
                     Console.WriteLine("Kitalálandó szó: " + tipp);
@@ -54,6 +54,11 @@ namespace Kitalalo
                     Console.Clear();
                     Console.WriteLine("Gratulálok, kitaláltad a szót!");
                     Console.WriteLine("A kitalálandó szó a(z): " + ezlett + " volt.");
+                    break;
+                }
+                else if (guess == "stop")
+                {
+                    Console.WriteLine("oke");
                     break;
                 }
                 else
